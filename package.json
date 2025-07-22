@@ -1,0 +1,11 @@
+{
+  "name": "totodoro",
+  "version": "1.0.0",
+  "description": "Totodoro - Pomodoro Timer App",
+  "main": "main.js",
+  "scripts": {
+    "start": "echo 'No start script defined'"
+  },
+  "author": "",
+  "license": "MIT"
+}
