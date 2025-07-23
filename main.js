@@ -3,6 +3,7 @@ const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('start');
 const pauseButton = document.getElementById('pause');
 const resetButton = document.getElementById('reset');
+const gif = document.getElementById('totoroGif');
 
 // variaveis do pomodoro
 
@@ -20,6 +21,7 @@ function updateDisplay() {
 // função para inciiar o time 
 function startTimer() {
     if (!isRunning) {
+        gif.style.display = 'block'; // Mostra o gif
         isRunning = true;
         interval = setInterval(() => {
             if (seconds === 0) {
@@ -43,6 +45,7 @@ function startTimer() {
 function stopTimer() {
     clearInterval(interval);
     isRunning = false;
+    gif.style.display = 'none'; // Esconde o gif
 }   
 
 //função para reniciar
@@ -52,6 +55,7 @@ function resetTimer() {
     minutes = 25;
     seconds = 0;
     updateDisplay();
+    gif.style.display = 'none'; // Esconde o gif
 }
 
 //Eventos dos Botões
