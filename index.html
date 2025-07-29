@@ -7,18 +7,31 @@
 
     <link rel="shortcut icon" href="./favicon_totoro.ico" type="image/x-icon">
     <script src="main.js" defer></script>
+    <script src="electron-renderer.js" defer></script>
     <title> Meu amigo Totodoro</title>
 </head>
 <body>
 <main>
-  <!-- Imagem do Totoro animado -->
-  <img id="totoroGif" src="imagens/totoro_corda.gif" alt="Totoro animado" style="display:none; width:180px; margin:20px auto;">
+  <!-- Barra de título com controles de janela -->
+  <div class="window-controls">
+    <div class="control-buttons">
+      <button class="control-btn minimize-btn" title="Minimizar"></button>
+      <button class="control-btn maximize-btn" title="Maximizar"></button>
+      <button class="control-btn close-btn" title="Fechar"></button>
+    </div>
+  </div>
   
-  <h1>Totodoro</h1> <!-- Titulo Principal do APP --> 
-  <div id="timer"> 25:00 </div> <!-- isso é o minutos -->
-  <button id="start">Iniciar</button>
-  <button id="pause">Pausar</button>
-  <button id="reset">Reiniciar</button>
+  <div class="main-content">
+    <h1>Totodoro</h1> <!-- Titulo Principal do APP --> 
+    
+    <!-- Imagem do Totoro animado -->
+    <img id="totoroGif" src="imagens/totoro_corda.gif" alt="Totoro animado" style="display:none; width:180px; margin:20px auto;">
+    
+    <div id="timer"> 25:00 </div> <!-- isso é o minutos -->
+    <button id="start">Iniciar</button>
+    <button id="pause">Pausar</button>
+    <button id="reset">Reiniciar</button>
+  </div>
 
 </main>
 

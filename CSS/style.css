@@ -14,12 +14,103 @@ body {
 }
 
 main {
-    background: rgba(255, 249, 234, 0.95); /* Pastel creme */
+    background: rgba(255, 249, 234, 0.95); /* Pastel creme - voltando ao original */
     margin: 48px auto; 
-    padding: 32px 24px;
+    padding: 0; /* Remove padding para acomodar a barra de título */
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(200, 200, 200, 0.15);
     max-width: 400px;
+    overflow: hidden; /* Para arredondar os cantos da barra */
+}
+
+/* Barra de controles de janela */
+.window-controls {
+    background: rgba(163, 177, 138, 0.05); /* Verde pastel bem suave */
+    padding: 8px 12px;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid rgba(163, 177, 138, 0.1);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.control-btn {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 6px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-family: 'Arial', sans-serif;
+    /* Cores mais discretas para não competir com os botões principais */
+    background: rgba(183, 228, 199, 0.6); /* Verde pastel mais suave */
+    color: #495057; /* Cor padrão dos outros botões */
+    box-shadow: 0 1px 3px rgba(200, 200, 200, 0.08);
+}
+
+.control-btn:hover {
+    background: rgba(247, 183, 163, 0.8); /* Rosa pastel mais suave no hover */
+    color: #495057; /* Cor padrão */
+    box-shadow: 0 2px 6px rgba(200, 200, 200, 0.12);
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Símbolos específicos para cada botão */
+.minimize-btn::before {
+    content: '─';
+    font-size: 6px;
+    color: #495057;
+}
+
+.maximize-btn::before {
+    content: var(--symbol, '□');
+    font-size: 6px;
+    color: #495057;
+}
+
+.close-btn::before {
+    content: '✕';
+    font-size: 5px;
+    color: #495057;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 480px) {
+    .control-btn {
+        width: 10px;
+        height: 10px;
+        font-size: 5px;
+    }
+    
+    .minimize-btn::before,
+    .close-btn::before {
+        font-size: 5px;
+    }
+    
+    .maximize-btn::before {
+        font-size: 5px;
+    }
+    
+    .control-buttons {
+        gap: 4px;
+    }
+    
+    .window-controls {
+        padding: 6px 10px;
+    }
+}
+
+/* Adiciona padding ao conteúdo principal */
+.main-content {
+    padding: 32px 24px;
 }
 
 h1{
@@ -45,19 +136,6 @@ h1{
 }
 
 button {
-    background: #6b8e23; /* Verde floresta */
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 28px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.08em;
-    margin: 0 8px;
-    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
-    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-button {
     background: #b7e4c7; /* Verde pastel */
     color: #495057;
     border: none;
@@ -70,6 +148,7 @@ button {
     box-shadow: 0 2px 8px rgba(200, 200, 200, 0.10);
     transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
+
 button:hover {
     background: #f7b7a3; /* Rosa pastel ao passar o mouse */
     color: #7d8ca3;
