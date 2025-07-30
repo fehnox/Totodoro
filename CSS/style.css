@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Gloria+Hallelujah&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pacifico&display=swap');
 
-
-
-
 body {
     background: #FFFFFF; /* Fundo completamente branco */
     font-family: 'Pacifico';
@@ -17,76 +14,6 @@ body {
     justify-content: center;
 }
 
-/* Controles de janela estilo aplicativo normal - HORIZONTAL */
-.window-controls {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: row; /* Muda para horizontal */
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid #d0d0d0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.control-btn {
-    width: 32px;
-    height: 32px; /* Quadrado perfeito */
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-right: 1px solid #d0d0d0; /* Muda de border-bottom para border-right */
-    background: #f8f9fa;
-    color: #495057;
-    position: relative;
-}
-
-.control-btn:last-child {
-    border-right: none; /* Remove a borda direita do último botão */
-}
-
-/* Hover com a cor do relógio - gradiente azul/roxo */
-.control-btn:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-}
-
-/* Remove os estilos individuais antigos */
-.minimize-btn, .maximize-btn, .close-btn {
-    background: #f8f9fa;
-}
-
-/* Símbolos mais limpos */
-.minimize-btn::before {
-    content: '−';
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.maximize-btn::before {
-    content: '□';
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.close-btn::before {
-    content: '×';
-    font-size: 20px;
-    font-weight: bold;
-}
-
 main {
     background: #FFFFFF;
     padding: 0;
@@ -98,7 +25,6 @@ main {
     overflow: hidden;
     border: 1px solid #d0d0d0;
     position: relative;
-    margin-top: 0; /* Remove o margin-top */
 }
 
 /* Adiciona padding ao conteúdo principal */
@@ -160,6 +86,17 @@ button:hover {
     transform: translateY(-2px) scale(1.02);
 }
 
+/* Botão configurar com estilo diferenciado */
+#config {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%); /* Verde */
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+#config:hover {
+    background: linear-gradient(135deg, #218838 0%, #1abc9c 100%);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
 /* Container para os botões */
 .button-container {
     display: flex;
@@ -169,27 +106,81 @@ button:hover {
     margin-top: 16px;
 }
 
+/* Controles de janela simples e visíveis */
+.window-controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.control-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: #f8f9fa;
+    color: #495057;
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Símbolos bem visíveis */
+.minimize-btn::before {
+    content: '−';
+    font-size: 18px;
+    line-height: 1;
+}
+
+.maximize-btn::before {
+    content: '□';
+    font-size: 14px;
+    line-height: 1;
+}
+
+.close-btn::before {
+    content: '×';
+    font-size: 18px;
+    line-height: 1;
+}
+
 /* Responsividade */
 @media (max-width: 480px) {
     .window-controls {
-        top: 6px;
-        left: 6px;
-        gap: 4px;
+        top: 8px;
+        right: 8px;
+        gap: 3px;
     }
     
     .control-btn {
-        width: 10px;
-        height: 10px;
-        font-size: 7px;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
     }
     
-    .close-btn::before,
     .minimize-btn::before {
-        font-size: 8px;
+        font-size: 14px;
     }
     
     .maximize-btn::before {
-        font-size: 6px;
+        font-size: 10px;
+    }
+    
+    .close-btn::before {
+        font-size: 14px;
     }
     
     main {

@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
-
     <link rel="shortcut icon" href="./favicon_totoro.ico" type="image/x-icon">
+    <script src="notification.js"></script>
     <script src="main.js" defer></script>
     <script src="electron-renderer.js" defer></script>
-    <title> Meu amigo Totodoro</title>
+    <title>Meu amigo Totodoro</title>
 </head>
 <body>
-<main>
-  <!-- Barra de título com controles de janela -->
+  <!-- Controles de janela -->
   <div class="window-controls">
-    <div class="control-buttons">
-      <button class="control-btn close-btn" title="Fechar"></button>
-      <button class="control-btn minimize-btn" title="Minimizar"></button>
-      <button class="control-btn maximize-btn" title="Maximizar"></button>
-    </div>
-  </div>
-  
-  <div class="main-content">
-    <h1>Totodoro</h1> <!-- Titulo Principal do APP --> 
-    
-    <!-- Imagem do Totoro animado -->
-    <img id="totoroGif" src="imagens/totoro_corda.gif" alt="Totoro animado" style="display:none; width:160px; margin:12px auto;">
-    
-    <div id="timer"> 25:00 </div> <!-- isso é o minutos -->
-    
-    <div class="button-container">
-      <button id="start">Iniciar</button>
-      <button id="pause">Pausar</button>
-      <button id="reset">Reiniciar</button>
-    </div>
+    <button class="control-btn minimize-btn" title="Minimizar"></button>
+    <button class="control-btn maximize-btn" title="Maximizar"></button>
+    <button class="control-btn close-btn" title="Fechar"></button>
   </div>
 
-</main>
-
+  <main>
+    <div class="main-content">
+      <h1>Totodoro</h1>
+      
+      <!-- Imagem do Totoro animado -->
+      <img id="totoroGif" src="" alt="Totoro animado" style="display:none; width:160px; margin:12px auto;">
+      
+      <!-- Audio para notificação -->
+      <audio id="notificationSound" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+D1ul8XAD2TzfHNfC4GJHzN8t+TQAoUXbPq7axVEwlGn+H2u2EXAz2QzPLNfC0GI3rHn" type="audio/wav">
+      </audio>
+      
+      <!-- Display do timer -->
+      <div id="timer">25:00</div>
+      
+      <!-- Botões de controle -->
+      <div class="button-container">
+        <button id="start">Iniciar</button>
+        <button id="pause">Pausar</button>
+        <button id="reset">Reiniciar</button>
+        <button id="config">Configurar</button>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
