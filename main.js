@@ -223,26 +223,20 @@ function saveConfig() {
     const inputValue = minutesInput.value.trim();
     const newMinutes = parseInt(inputValue);
     
-    // Validação mais robusta - tratar campo vazio
-    if (inputValue === '' || inputValue === '0') {
-        alert('Por favor, digite um número válido entre 1 e 60.');
-        minutesInput.value = minutes; // Restaura o valor anterior
+    // Validação simples e direta
+    if (!inputValue || inputValue === '0' || isNaN(newMinutes) || newMinutes < 1 || newMinutes > 60) {
+        alert('Por favor, digite um número entre 1 e 60.');
+        minutesInput.value = '25'; // Valor padrão
         minutesInput.focus();
         minutesInput.select();
         return;
     }
     
-    if (!isNaN(newMinutes) && newMinutes >= 1 && newMinutes <= 60) {
-        minutes = newMinutes;
-        seconds = 0;
-        updateDisplay();
-        closeConfigModal();
-    } else {
-        alert('Por favor, digite um número válido entre 1 e 60.');
-        minutesInput.value = minutes; // Restaura o valor anterior
-        minutesInput.focus();
-        minutesInput.select();
-    }
+    // Salvar e atualizar
+    minutes = newMinutes;
+    seconds = 0;
+    updateDisplay();
+    closeConfigModal();
 }
 
 // Função para fechar o modal
