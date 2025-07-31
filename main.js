@@ -107,20 +107,20 @@ function playNotificationSound() {
 
 // Função para mostrar notificação visual quando o áudio falha
 function showVisualNotification() {
-    // Piscar a tela
-    document.body.style.transition = 'background-color 0.1s';
-    document.body.style.backgroundColor = '#ffeb3b';
+    // Piscar a tela com cores harmoniosas do tema
+    document.body.style.transition = 'background 0.2s ease';
+    document.body.style.background = 'linear-gradient(135deg, #ffb3d9 0%, #ffc0cb 50%, #ffb3e6 100%)'; // Rosa pastel dos botões
     
     setTimeout(() => {
-        document.body.style.backgroundColor = '#ffffff';
+        document.body.style.background = 'linear-gradient(135deg, #ffeef7 0%, #fed7e2 30%, #fbb6ce 70%, #f8bbd9 100%)'; // Volta para o gradiente original
         setTimeout(() => {
-            document.body.style.backgroundColor = '#ffeb3b';
+            document.body.style.background = 'linear-gradient(135deg, #ffb3d9 0%, #ffc0cb 50%, #ffb3e6 100%)'; // Rosa pastel novamente
             setTimeout(() => {
-                document.body.style.backgroundColor = '#ffffff';
+                document.body.style.background = 'linear-gradient(135deg, #ffeef7 0%, #fed7e2 30%, #fbb6ce 70%, #f8bbd9 100%)'; // Volta para o original
                 document.body.style.transition = '';
-            }, 100);
-        }, 100);
-    }, 100);
+            }, 150);
+        }, 150);
+    }, 150);
     
     console.log('🔔 Notificação visual ativa (som não disponível)');
 }
