@@ -4,8 +4,15 @@ const startButton = document.getElementById('start');
 const pauseButton = document.getElementById('pause');
 const resetButton = document.getElementById('reset');
 const configButton = document.getElementById('config');
+const testSoundButton = document.getElementById('testSound');
 const gif = document.getElementById('totoroGif');
 const notificationSound = document.getElementById('notificationSound');
+
+// Elementos do modal
+const configModal = document.getElementById('configModal');
+const minutesInput = document.getElementById('minutesInput');
+const saveConfigButton = document.getElementById('saveConfig');
+const cancelConfigButton = document.getElementById('cancelConfig');
 
 // Verificação de segurança
 if (!timerDisplay || !startButton || !pauseButton || !resetButton || !configButton || !gif) {
@@ -34,39 +41,77 @@ function updateDisplay() {
 
 // Função para tocar som de notificação
 function playNotificationSound() {
+    // Método 1: Tentar Web Audio API primeiro (mais confiável)
     try {
-        if (notificationSound) {
-            notificationSound.currentTime = 0; // Reinicia o áudio
-            notificationSound.play().catch(e => {
-                console.log('Não foi possível tocar o som do arquivo:', e);
-                // Fallback: usar Web Audio API
-                useWebAudioFallback();
-            });
-        } else {
-            // Se não há elemento de áudio, usa Web Audio API
-            useWebAudioFallback();
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Função para criar um beep
+        function createBeep(frequency, duration, volume = 0.1) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
         }
+        
+        // Sequência de beeps
+        createBeep(800, 0.2); // Primeiro beep
+        setTimeout(() => createBeep(600, 0.2), 300); // Segundo beep
+        setTimeout(() => createBeep(800, 0.3), 600); // Terceiro beep
+        
+        console.log('🔔 Som de notificação tocado!');
+        
     } catch (error) {
-        console.log('Erro ao tocar som:', error);
-        useWebAudioFallback();
+        console.log('Web Audio API falhou, tentando método alternativo:', error);
+        
+        // Método 2: Tentar elemento audio
+        try {
+            if (notificationSound) {
+                // Criar um som simples via Data URL
+                notificationSound.src = 'data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ4AAAA=';
+                notificationSound.play().catch(e => {
+                    console.log('Audio element também falhou:', e);
+                    // Método 3: Feedback visual como fallback
+                    showVisualNotification();
+                });
+            } else {
+                showVisualNotification();
+            }
+        } catch (audioError) {
+            console.log('Todos os métodos de áudio falharam:', audioError);
+            showVisualNotification();
+        }
     }
 }
 
-// Função fallback usando Web Audio API
-function useWebAudioFallback() {
-    try {
-        if (window.createNotificationBeep) {
-            const playBeeps = window.createNotificationBeep();
-            if (playBeeps) {
-                playBeeps();
-            }
-        } else {
-            // Fallback simples
-            console.log('🔔 Timer finalizado! (Som não disponível)');
-        }
-    } catch (error) {
-        console.log('Fallback de áudio falhou:', error);
-    }
+// Função para mostrar notificação visual quando o áudio falha
+function showVisualNotification() {
+    // Piscar a tela
+    document.body.style.transition = 'background-color 0.1s';
+    document.body.style.backgroundColor = '#ffeb3b';
+    
+    setTimeout(() => {
+        document.body.style.backgroundColor = '#ffffff';
+        setTimeout(() => {
+            document.body.style.backgroundColor = '#ffeb3b';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#ffffff';
+                document.body.style.transition = '';
+            }, 100);
+        }, 100);
+    }, 100);
+    
+    console.log('🔔 Notificação visual ativa (som não disponível)');
 }
 
 // função para iniciar o timer 
@@ -124,29 +169,89 @@ function resetTimer() {
 // função para configurar o timer
 function configTimer() {
     if (!isRunning) {
-        const newMinutes = prompt('Digite o número de minutos (1-60):', minutes);
-        const parsedMinutes = parseInt(newMinutes);
+        // Atualiza o input com o valor atual
+        minutesInput.value = minutes;
         
-        if (parsedMinutes && parsedMinutes >= 1 && parsedMinutes <= 60) {
-            minutes = parsedMinutes;
-            seconds = 0;
-            updateDisplay();
-        } else if (newMinutes !== null) {
-            alert('Por favor, digite um número válido entre 1 e 60.');
-        }
+        // Mostra o modal
+        configModal.style.display = 'block';
+        
+        // Foca no input
+        setTimeout(() => {
+            minutesInput.focus();
+            minutesInput.select();
+        }, 100);
     } else {
         alert('Pause o timer antes de configurar!');
     }
 }
 
+// Função para salvar a configuração
+function saveConfig() {
+    const newMinutes = parseInt(minutesInput.value);
+    
+    if (newMinutes && newMinutes >= 1 && newMinutes <= 60) {
+        minutes = newMinutes;
+        seconds = 0;
+        updateDisplay();
+        closeConfigModal();
+    } else {
+        alert('Por favor, digite um número válido entre 1 e 60.');
+        minutesInput.focus();
+        minutesInput.select();
+    }
+}
+
+// Função para fechar o modal
+function closeConfigModal() {
+    configModal.style.display = 'none';
+}
+
 // Inicializar o display
 updateDisplay();
+
+// Função para ativar áudio (necessário para alguns navegadores)
+function enableAudio() {
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    } catch (error) {
+        console.log('Não foi possível ativar o contexto de áudio:', error);
+    }
+}
+
+// Ativar áudio na primeira interação do usuário
+document.addEventListener('click', enableAudio, { once: true });
 
 //Eventos dos Botões
 if (startButton) startButton.onclick = startTimer;
 if (pauseButton) pauseButton.onclick = stopTimer;
 if (resetButton) resetButton.onclick = resetTimer;
 if (configButton) configButton.onclick = configTimer;
+if (testSoundButton) testSoundButton.onclick = playNotificationSound;
+
+// Eventos do modal
+if (saveConfigButton) saveConfigButton.onclick = saveConfig;
+if (cancelConfigButton) cancelConfigButton.onclick = closeConfigModal;
+
+// Fechar modal clicando fora dele
+if (configModal) {
+    configModal.onclick = function(event) {
+        if (event.target === configModal) {
+            closeConfigModal();
+        }
+    };
+}
+
+// Permitir salvar com Enter no input
+if (minutesInput) {
+    minutesInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            saveConfig();
+        }
+    });
+}
 
 // Eventos dos controles de janela (apenas se não estiver no Electron)
 if (typeof require === 'undefined') {

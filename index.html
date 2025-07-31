@@ -27,8 +27,7 @@
       
       <!-- Audio para notificação -->
       <audio id="notificationSound" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+D1ul8XAD2TzfHNfC4GJHzN8t+TQAoUXbPq7axVEwlGn+H2u2EXAz2QzPLNfC0GI3rHn" type="audio/wav">
+        <!-- Som local mais simples -->
       </audio>
       
       <!-- Display do timer -->
@@ -40,6 +39,22 @@
         <button id="pause">Pausar</button>
         <button id="reset">Reiniciar</button>
         <button id="config">Configurar</button>
+        <button id="testSound">🔔 Testar Som</button>
+      </div>
+    </div>
+
+    <!-- Modal de configuração -->
+    <div id="configModal" class="modal">
+      <div class="modal-content">
+        <h3>Configurar Timer</h3>
+        <div class="config-options">
+          <label for="minutesInput">Minutos (1-60):</label>
+          <input type="number" id="minutesInput" min="1" max="60" value="25">
+        </div>
+        <div class="modal-buttons">
+          <button id="saveConfig">Salvar</button>
+          <button id="cancelConfig">Cancelar</button>
+        </div>
       </div>
     </div>
   </main>
