@@ -49,7 +49,7 @@
         <h3>Configurar Timer</h3>
         <div class="config-options">
           <label for="minutesInput">Minutos (1-60):</label>
-          <input type="number" id="minutesInput" min="1" max="60" value="25">
+          <input type="text" id="minutesInput" min="1" max="60" value="25" pattern="[0-9]*" inputmode="numeric">
         </div>
         <div class="modal-buttons">
           <button id="saveConfig">Salvar</button>

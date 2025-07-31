@@ -34,8 +34,19 @@ let isRunning = false;
 let currentGifIndex = 0; // Índice do GIF atual
 let isMaximized = false; // Estado da janela
 
+// Função para garantir valores válidos
+function ensureValidValues() {
+    if (isNaN(minutes) || minutes <= 0 || minutes > 60) {
+        minutes = 25;
+    }
+    if (isNaN(seconds) || seconds < 0 || seconds >= 60) {
+        seconds = 0;
+    }
+}
+
 // Função para atualizar o display do temporizador
 function updateDisplay() {
+    ensureValidValues(); // Sempre garantir valores válidos antes de mostrar
     timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
@@ -117,6 +128,16 @@ function showVisualNotification() {
 // função para iniciar o timer 
 function startTimer() {
     if (!isRunning) {
+        // Garantir valores válidos sempre
+        ensureValidValues();
+        
+        // Verificação adicional
+        if (minutes <= 0) {
+            alert('Configure o timer primeiro!');
+            configTimer(); // Abre a configuração automaticamente
+            return;
+        }
+        
         // Troca para o próximo GIF na sequência
         gif.src = gifs[currentGifIndex];
         currentGifIndex = (currentGifIndex + 1) % gifs.length; // Rotaciona entre os GIFs
@@ -129,12 +150,17 @@ function startTimer() {
                     clearInterval(interval);
                     isRunning = false;
                     
+                    // Restaurar valores para próximo uso
+                    minutes = 25;
+                    seconds = 0;
+                    
                     // Toca o som de notificação
                     playNotificationSound();
                     
                     // Mostra o alerta após um pequeno delay para o som tocar
                     setTimeout(() => {
                         alert('🎉 Tempo esgotado! Parabéns! 🦫');
+                        updateDisplay(); // Atualizar display após terminar
                     }, 500);
                     
                     gif.style.display = 'none'; // Esconde o gif quando termina
@@ -161,7 +187,11 @@ function stopTimer() {
 function resetTimer() {
     clearInterval(interval);
     isRunning = false;
+    
+    // Sempre restaurar para valores padrão
+    minutes = 25;
     seconds = 0;
+    
     updateDisplay();
     if (gif) gif.style.display = 'none'; // Esconde o gif
 }
@@ -169,6 +199,9 @@ function resetTimer() {
 // função para configurar o timer
 function configTimer() {
     if (!isRunning) {
+        // Garantir valores válidos antes de abrir
+        ensureValidValues();
+        
         // Atualiza o input com o valor atual
         minutesInput.value = minutes;
         
@@ -187,15 +220,26 @@ function configTimer() {
 
 // Função para salvar a configuração
 function saveConfig() {
-    const newMinutes = parseInt(minutesInput.value);
+    const inputValue = minutesInput.value.trim();
+    const newMinutes = parseInt(inputValue);
     
-    if (newMinutes && newMinutes >= 1 && newMinutes <= 60) {
+    // Validação mais robusta - tratar campo vazio
+    if (inputValue === '' || inputValue === '0') {
+        alert('Por favor, digite um número válido entre 1 e 60.');
+        minutesInput.value = minutes; // Restaura o valor anterior
+        minutesInput.focus();
+        minutesInput.select();
+        return;
+    }
+    
+    if (!isNaN(newMinutes) && newMinutes >= 1 && newMinutes <= 60) {
         minutes = newMinutes;
         seconds = 0;
         updateDisplay();
         closeConfigModal();
     } else {
         alert('Por favor, digite um número válido entre 1 e 60.');
+        minutesInput.value = minutes; // Restaura o valor anterior
         minutesInput.focus();
         minutesInput.select();
     }
@@ -207,6 +251,7 @@ function closeConfigModal() {
 }
 
 // Inicializar o display
+ensureValidValues(); // Garantir valores válidos na inicialização
 updateDisplay();
 
 // Função para ativar áudio (necessário para alguns navegadores)
@@ -249,6 +294,51 @@ if (minutesInput) {
     minutesInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             saveConfig();
+        }
+    });
+    
+    // Permitir apenas números no input
+    minutesInput.addEventListener('keypress', function(event) {
+        // Permitir: backspace, delete, tab, escape, enter
+        if ([8, 9, 27, 13, 46].indexOf(event.keyCode) !== -1 ||
+            // Permitir: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+            (event.keyCode === 65 && event.ctrlKey === true) ||
+            (event.keyCode === 67 && event.ctrlKey === true) ||
+            (event.keyCode === 86 && event.ctrlKey === true) ||
+            (event.keyCode === 88 && event.ctrlKey === true)) {
+            return;
+        }
+        // Garantir que é um número
+        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+            event.preventDefault();
+        }
+    });
+    
+    // Alternativa mais simples: permitir apenas dígitos
+    minutesInput.addEventListener('input', function(event) {
+        // Remove qualquer caractere que não seja número
+        this.value = this.value.replace(/[^0-9]/g, '');
+        
+        // Limita a 2 dígitos
+        if (this.value.length > 2) {
+            this.value = this.value.slice(0, 2);
+        }
+        
+        // Se o valor for maior que 60, corrige para 60
+        if (parseInt(this.value) > 60) {
+            this.value = '60';
+        }
+        
+        // Se o valor for 0 ou vazio, não permitir (visual feedback)
+        if (this.value === '0') {
+            this.value = '1';
+        }
+    });
+    
+    // Validação ao perder o foco
+    minutesInput.addEventListener('blur', function(event) {
+        if (this.value === '' || this.value === '0') {
+            this.value = minutes; // Restaura o valor anterior válido
         }
     });
 }
