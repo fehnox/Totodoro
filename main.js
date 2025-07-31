@@ -328,17 +328,12 @@ if (minutesInput) {
         if (parseInt(this.value) > 60) {
             this.value = '60';
         }
-        
-        // Se o valor for 0 ou vazio, não permitir (visual feedback)
-        if (this.value === '0') {
-            this.value = '1';
-        }
     });
     
     // Validação ao perder o foco
     minutesInput.addEventListener('blur', function(event) {
         if (this.value === '' || this.value === '0') {
-            this.value = minutes; // Restaura o valor anterior válido
+            this.value = '25'; // Sempre usar 25 como padrão
         }
     });
 }
