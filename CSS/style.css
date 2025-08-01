@@ -49,13 +49,13 @@ h1{
 
 #timer {
     font-size: 2.5em;
-    color: #FFFFFF; /* Texto branco */
+    color: #744c7d; /* Roxo pastel harmonioso */
     margin: 16px 0;
-    background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #7fcdcd 100%); /* Gradiente verde pastel/menta */
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 50%, #ddeeff 100%); /* Azul muito claro pastel */
     padding: 12px 0;
     border-radius: 20px;
     font-family: 'Gloria Hallelujah', Courier, monospace;
-    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.3); /* Sombra verde pastel mais suave */
+    box-shadow: 0 8px 25px rgba(221, 238, 255, 0.3); /* Sombra azul muito suave */
     letter-spacing: 2px;
     transition: all 0.3s ease;
     font-weight: bold;
@@ -64,8 +64,8 @@ h1{
 
 #timer:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.5);
-    background: linear-gradient(135deg, #7fcdcd 0%, #88d8c0 50%, #a8e6cf 100%); /* Inverte o gradiente no hover */
+    box-shadow: 0 10px 30px rgba(221, 238, 255, 0.4);
+    background: linear-gradient(135deg, #ddeeff 0%, #e6f3ff 50%, #f0f8ff 100%); /* Inverte o gradiente azul no hover */
 }
 
 button {
@@ -91,14 +91,14 @@ button:hover {
 
 /* Botão configurar com estilo diferenciado */
 #config {
-    background: linear-gradient(135deg, #b3e5d1 0%, #a8e6cf 50%, #7fcdcd 100%); /* Verde menta pastel */
-    color: #2d5a27; /* Verde escuro para texto */
-    box-shadow: 0 6px 20px rgba(168, 230, 207, 0.25); /* Sombra mais suave */
+    background: linear-gradient(135deg, #f0f0ff 0%, #e8e8ff 50%, #e0e0ff 100%); /* Lilás muito claro pastel */
+    color: #6b5b8a; /* Roxo mais suave para texto */
+    box-shadow: 0 6px 20px rgba(224, 224, 255, 0.25); /* Sombra lilás suave */
 }
 
 #config:hover {
-    background: linear-gradient(135deg, #7fcdcd 0%, #a8e6cf 50%, #b3e5d1 100%);
-    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.4);
+    background: linear-gradient(135deg, #e0e0ff 0%, #e8e8ff 50%, #f0f0ff 100%);
+    box-shadow: 0 8px 25px rgba(224, 224, 255, 0.4);
 }
 
 /* Botão testar som com estilo diferenciado */
