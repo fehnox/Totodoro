@@ -102,23 +102,100 @@ Totodoro/
 └── 🦫 favicon_totoro.ico     # Ícone da aplicação
 ```
 
-## 🔧 Problemas comuns
+## 🎨 Paleta de Cores
 
-**Se o Node.js não funcionar:**
-1. Feche este terminal
-2. Abra um novo PowerShell como administrador
-3. Execute: `npm install`
-4. Execute: `npm start`
+<div align="center">
 
-**Para atualizar o app:**
-1. Edite seus arquivos normalmente
-2. Salve
-3. Reinicie o app (`npm start`)
+| Cor | Hex | Uso |
+|-----|-----|-----|
+| 🌸 Rosa Pastel | `#ffb3d9` | Botões principais |
+| 💜 Roxo Suave | `#744c7d` | Textos e títulos |
+| 💙 Azul Claro | `#f0f8ff` | Timer display |
+| 💛 Amarelo Pastel | `#ffe4b3` | Botão testar som |
+| 🤍 Branco Rosé | `#fff5f5` | Fundos e destaques |
 
-## 🎨 Personalização
+</div>
 
-Você pode mudar:
-- Tamanho da janela em `electron-main.js` (width/height)
-- Cores e estilos em `style.css`
-- Lógica do timer em `main.js`
-- Adicionar novos GIFs na pasta `imagens/`
+## 🌟 Recursos Especiais
+
+### 🎭 Experiência Visual
+- **Efeitos hover** suaves em todos os botões
+- **Animações de escala** nos elementos interativos
+- **Transições fluidas** entre estados
+- **Sombras coloridas** que complementam o tema
+
+### 🎵 Experiência Sonora
+- **Sequência de beeps** harmoniosa ao finalizar
+- **Teste de som** para configuração prévia
+- **Fallback visual** quando o áudio não está disponível
+
+### 💻 Compatibilidade
+- **Navegadores modernos** (Chrome, Firefox, Safari, Edge)
+- **Sistemas operacionais** (Windows, macOS, Linux via Electron)
+- **Dispositivos móveis** (responsividade completa)
+
+## 🔧 Personalização
+
+### 🎨 Modificar Aparência
+- **Cores**: Edite `CSS/style.css`
+- **Fontes**: Altere as importações do Google Fonts
+- **Tamanhos**: Ajuste dimensões e espaçamentos
+
+### 🖼️ Adicionar Animações
+- Coloque novos GIFs na pasta `imagens/`
+- Atualize o array `gifs` em `main.js`
+
+### ⚙️ Configurações da Janela
+- Tamanho inicial em `electron-main.js`
+- Comportamentos da janela
+- Ícones e metadados
+
+## 🔧 Solução de Problemas
+
+### ❌ Node.js não funciona
+1. Feche o terminal atual
+2. Abra PowerShell como **Administrador**
+3. Execute `npm install`
+4. Execute `npm start`
+
+### 🔄 Atualizar aplicação
+1. Edite os arquivos desejados
+2. Salve as alterações
+3. Reinicie com `npm start`
+
+### 🚫 Som não funciona
+- Use o botão "🔔 Testar Som"
+- Verifique permissões do navegador
+- A notificação visual é o fallback automático
+
+## 🤝 Contribuindo
+
+Contribuições são muito bem-vindas! Sinta-se à vontade para:
+
+1. 🍴 Fazer um fork do projeto
+2. 🌿 Criar uma branch para sua feature (`git checkout -b feature/NovaFeature`)
+3. 💾 Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. 📤 Push para a branch (`git push origin feature/NovaFeature`)
+5. 🔄 Abrir um Pull Request
+
+## 📜 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🙏 Agradecimentos
+
+- **Studio Ghibli** - Pela inspiração mágica do Totoro
+- **Hayao Miyazaki** - Por criar personagens tão encantadores
+- **Comunidade Open Source** - Por todas as ferramentas incríveis
+
+---
+
+<div align="center">
+  
+  **Feito com 💝 e muito ☕ by [fehnox](https://github.com/fehnox)**
+  
+  *"Às vezes você deve atravessar a escuridão para encontrar a luz"* - Totoro
+  
+  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/fehnox/Totodoro)
+  
+</div>
