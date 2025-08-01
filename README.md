@@ -1,61 +1,105 @@
-# 🦫 Totodoro - App Desktop
+# 🦫 Totodoro - Pomodoro Timer
 
-## 📋 Como instalar e executar
+<div align="center">
+  
+  ![Totodoro Banner](https://img.shields.io/badge/Totodoro-Pomodoro%20Timer-ff99cc?style=for-the-badge&logo=heart&logoColor=white)
+  
+  *Um timer Pomodoro encantador inspirado no querido Totoro do Studio Ghibli*
+  
+  [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+  [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+  [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+  [![Electron](https://img.shields.io/badge/Electron-2B2E3A?style=flat-square&logo=electron&logoColor=9FEAF9)](https://www.electronjs.org/)
+  
+</div>
 
-### 1. **Instalar dependências** (precisa do Node.js)
+## ✨ Sobre o Projeto
+
+O **Totodoro** é um timer Pomodoro temático que combina produtividade com a magia do Studio Ghibli. Desenvolvido com uma interface pastel suave e animações encantadoras do Totoro, este aplicativo torna suas sessões de estudo e trabalho mais agradáveis e motivadoras.
+
+### 🎯 Características Principais
+
+- 🦫 **Animações do Totoro** - GIFs rotativos durante as sessões
+- 🎨 **Design Pastel Harmonioso** - Interface suave e relaxante
+- 🔔 **Notificações Sonoras** - Sistema de áudio com múltiplos fallbacks
+- ⚡ **Aplicação Desktop** - Funciona como app nativo via Electron
+- 🎛️ **Controles Personalizados** - Minimize, maximize e feche como uma janela real
+- 📱 **Responsivo** - Funciona perfeitamente em diferentes tamanhos de tela
+
+## 🚀 Instalação e Execução
+
+### 💻 Pré-requisitos
+- **Node.js** instalado (versão 14 ou superior)
+- **npm** (incluído com Node.js)
+
+### 🖥️ Executar como Aplicação Desktop
 ```bash
+# 1. Clone o repositório
+git clone https://github.com/fehnox/Totodoro.git
+
+# 2. Navegue até a pasta
+cd Totodoro
+
+# 3. Instale as dependências
 npm install
-```
 
-### 2. **Executar o app**
-```bash
+# 4. Execute a aplicação
 npm start
 ```
 
-### 3. **Gerar executável** (opcional)
+### 📦 Gerar Executável (Opcional)
 ```bash
+# Construir distribuível
 npm run build
 ```
 
-## 🚀 O que foi configurado
+### � Executar no Navegador
+1. Abra o arquivo `index.html` em seu navegador favorito
+2. Configure o tempo desejado (1-60 minutos)
+3. Clique em "Iniciar" e veja o Totoro se animar!
 
-### ✅ **Electron funcionando**
-- Janela sem bordas nativas
-- Controles customizados funcionando
-- Ícone do Totoro
-- Tamanho inicial: 480x680px
+## 🎮 Como Usar
 
-### ✅ **Controles de janela reais**
-- **Minimizar**: Minimiza a janela de verdade
-- **Maximizar**: Maximiza/restaura a janela
-- **Fechar**: Fecha o aplicativo
+### ⏰ Funcionalidades do Timer
+- **Configurar**: Defina entre 1 a 60 minutos
+- **Iniciar**: Comece sua sessão produtiva
+- **Pausar**: Interrompa temporariamente
+- **Reiniciar**: Volte ao tempo inicial
+- **Testar Som**: Verifique as notificações
 
-### ✅ **Características do app**
-- Não tem menu (File, Edit, etc.)
-- Inicia com fundo da cor do tema
-- Funciona offline
-- Ícone na barra de tarefas
+### 🎭 Experiência Visual
+- **Animações automáticas**: 3 GIFs diferentes do Totoro
+- **Cores harmoniosas**: Tema pastel relaxante
+- **Efeitos suaves**: Hover e transições elegantes
 
-## 🛠️ Como editar depois
+## 🛠️ Tecnologias Utilizadas
 
-Todos os seus arquivos continuam editáveis:
-- `index.html` - Interface
-- `CSS/style.css` - Estilos
-- `main.js` - Lógica do timer
-- `electron-main.js` - Configurações da janela
-- `imagens/` - Seus GIFs do Totoro
+| Tecnologia | Uso |
+|------------|-----|
+| **HTML5** | Estrutura da aplicação |
+| **CSS3** | Estilização e animações |
+| **JavaScript ES6+** | Lógica do timer e interações |
+| **Electron** | Aplicação desktop nativa |
+| **Web Audio API** | Sistema de notificações sonoras |
+| **Google Fonts** | Tipografia (Pacifico & Gloria Hallelujah) |
 
-## 📁 Estrutura do projeto
+## 📁 Estrutura do Projeto
+
 ```
 Totodoro/
-├── index.html              ← Sua interface
-├── main.js                 ← Lógica do timer
-├── electron-main.js        ← Configuração do Electron
-├── electron-renderer.js    ← Integração dos controles
-├── package.json            ← Configurações do app
-├── CSS/style.css           ← Seus estilos
-├── imagens/                ← GIFs do Totoro
-└── favicon_totoro.ico      ← Ícone do app
+├── 📄 index.html              # Página principal
+├── 📄 main.js                 # Lógica do timer
+├── 📄 notification.js         # Sistema de notificações
+├── 📄 electron-main.js        # Configuração do Electron
+├── 📄 electron-renderer.js    # Interface Electron
+├── 📄 package.json           # Dependências e scripts
+├── 🎨 CSS/
+│   └── style.css             # Estilos principais
+├── 🖼️ imagens/
+│   ├── totoro_run.gif        # Animação 1
+│   ├── totoro_corda.gif      # Animação 2
+│   └── totorogif_bam.gif     # Animação 3
+└── 🦫 favicon_totoro.ico     # Ícone da aplicação
 ```
 
 ## 🔧 Problemas comuns
